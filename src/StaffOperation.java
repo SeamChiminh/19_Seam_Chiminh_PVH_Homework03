@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class StaffOperation {
+public class StaffOperation implements Color{
 
     public void displayStaffMember(List<StaffMember> staff) {
         Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
@@ -34,38 +34,38 @@ public class StaffOperation {
         staff.forEach(staffMember -> {
             if(staffMember instanceof Volunteer ){
                 Volunteer volunteer = (Volunteer) staffMember;
-                table.addCell("Volunteer", cellStyle);
+                table.addCell(BLUE+ "Volunteer" +RESET, cellStyle);
                 table.addCell(String.valueOf(volunteer.getId()), cellStyle);
-                table.addCell(volunteer.getName(), cellStyle);
-                table.addCell(volunteer.getAddress(), cellStyle);
-                table.addCell(String.valueOf(volunteer.getSalary()) , cellStyle);
-                table.addCell("---", cellStyle);
-                table.addCell("---", cellStyle);
-                table.addCell("---", cellStyle);
-                table.addCell(String.valueOf(volunteer.pay()), cellStyle);
+                table.addCell(GREEN+ volunteer.getName().toUpperCase() +RESET, cellStyle);
+                table.addCell(volunteer.getAddress().toUpperCase(), cellStyle);
+                table.addCell(String.valueOf("$ "+volunteer.getSalary()) , cellStyle);
+                table.addCell(RED+"---"+RESET, cellStyle);
+                table.addCell(RED+"---"+RESET, cellStyle);
+                table.addCell(RED+"---"+RESET, cellStyle);
+                table.addCell(PURPLE+ "$ "+volunteer.pay() +RESET, cellStyle);
 
             } else if (staffMember instanceof SalaryEmployee) {
                 SalaryEmployee salaryEmployee = (SalaryEmployee) staffMember;
-                table.addCell("Salary Employee", cellStyle);
+                table.addCell(BLUE+"Salary Employee"+RESET, cellStyle);
                 table.addCell(String.valueOf(salaryEmployee.getId()), cellStyle);
-                table.addCell(salaryEmployee.getName(), cellStyle);
-                table.addCell(salaryEmployee.getAddress(), cellStyle);
-                table.addCell(String.valueOf(salaryEmployee.getSalary()) , cellStyle);
-                table.addCell(String.valueOf(salaryEmployee.getBunus()), cellStyle);
-                table.addCell("---", cellStyle);
-                table.addCell("---", cellStyle);
-                table.addCell(String.valueOf(salaryEmployee.pay()), cellStyle);
+                table.addCell(GREEN+salaryEmployee.getName().toUpperCase()+RESET, cellStyle);
+                table.addCell(salaryEmployee.getAddress().toUpperCase(), cellStyle);
+                table.addCell(String.valueOf("$ "+salaryEmployee.getSalary()) , cellStyle);
+                table.addCell(String.valueOf("$ "+salaryEmployee.getBunus()), cellStyle);
+                table.addCell(RED+"---"+RESET, cellStyle);
+                table.addCell(RED+"---"+RESET, cellStyle);
+                table.addCell(PURPLE+ "$ "+salaryEmployee.pay() +RESET, cellStyle);
             }else{
                 HourlySalaryEmployee hourlySalaryEmployee = (HourlySalaryEmployee) staffMember;
-                table.addCell("Hourly Salary Employee", cellStyle);
+                table.addCell(BLUE+ "Hourly Salary Employee" +RESET, cellStyle);
                 table.addCell(String.valueOf(hourlySalaryEmployee.getId()), cellStyle);
-                table.addCell(hourlySalaryEmployee.getName(), cellStyle);
-                table.addCell(hourlySalaryEmployee.getAddress(), cellStyle);
-                table.addCell("---" , cellStyle);
-                table.addCell("---" , cellStyle);
+                table.addCell(GREEN+hourlySalaryEmployee.getName().toUpperCase()+RESET, cellStyle);
+                table.addCell(hourlySalaryEmployee.getAddress().toUpperCase(), cellStyle);
+                table.addCell(RED+"---"+RESET , cellStyle);
+                table.addCell(RED+"---"+RESET , cellStyle);
                 table.addCell(String.valueOf(hourlySalaryEmployee.getHourWorked()), cellStyle);
                 table.addCell(String.valueOf(hourlySalaryEmployee.getRate()), cellStyle);
-                table.addCell(String.valueOf(hourlySalaryEmployee.pay()), cellStyle);
+                table.addCell(PURPLE+String.valueOf("$ "+hourlySalaryEmployee.pay()) +RESET, cellStyle);
             }
         });
         System.out.println(table.render());
@@ -105,51 +105,51 @@ public class StaffOperation {
 
                         switch (choice) {
                             case 1 -> {
-                                System.out.print("Enter New Name: ");
+                                System.out.print("==> Enter New Name: ");
                                 staffMember.setName(sc.nextLine());
-                                System.out.println("* Name updated successfully! *");
+                                System.out.println(GREEN+"* Name updated successfully! *"+RESET);
                             }
                             case 2 -> {
-                                System.out.print("Enter New Address: ");
+                                System.out.print("==> Enter New Address: ");
                                 staffMember.setAddress(sc.nextLine());
-                                System.out.println("* Address updated successfully! *");
+                                System.out.println(GREEN+"* Address updated successfully! *"+RESET);
                             }
                             case 3 -> {
                                 if (staffMember instanceof SalaryEmployee salaryEmployee) {
-                                    System.out.print("Enter New Salary: ");
+                                    System.out.print("==> Enter New Salary: ");
                                     salaryEmployee.setSalary(sc.nextDouble());
                                     sc.nextLine();
-                                    System.out.println("* Salary updated successfully! *");
+                                    System.out.println(GREEN+"* Salary updated successfully! *"+RESET);
                                 } else if (staffMember instanceof Volunteer volunteer) {
-                                    System.out.print("Enter New Salary: ");
+                                    System.out.print("==> Enter New Salary: ");
                                     volunteer.setSalary(sc.nextDouble());
                                     sc.nextLine();
-                                    System.out.println("* Salary updated successfully! *");
+                                    System.out.println(GREEN+"* Salary updated successfully! *"+RESET);
                                 } else if (staffMember instanceof HourlySalaryEmployee hourlyEmployee) {
-                                    System.out.print("Enter New Hours Worked: ");
+                                    System.out.print("==> Enter New Hours Worked: ");
                                     hourlyEmployee.setHourWorked(sc.nextInt());
                                     sc.nextLine();
-                                    System.out.println("* Hours Worked updated successfully! *");
+                                    System.out.println(GREEN+"* Hours Worked updated successfully! *"+RESET);
                                 }
                             }
                             case 4 -> {
                                 if (staffMember instanceof SalaryEmployee salaryEmployee) {
-                                    System.out.print("Enter New Bonus: ");
+                                    System.out.print("==> Enter New Bonus: ");
                                     salaryEmployee.setBunus(sc.nextDouble());
                                     sc.nextLine();
-                                    System.out.println("* Bonus updated successfully! *");
+                                    System.out.println(GREEN+"* Bonus updated successfully! *"+RESET);
                                 } else if (staffMember instanceof HourlySalaryEmployee hourlyEmployee) {
-                                    System.out.print("Enter New Hourly Rate: ");
+                                    System.out.print("==> Enter New Hourly Rate: ");
                                     hourlyEmployee.setRate(sc.nextDouble());
                                     sc.nextLine();
-                                    System.out.println("* Hourly Rate updated successfully! *");
+                                    System.out.println(GREEN+"* Hourly Rate updated successfully! *"+RESET);
                                 }
                             }
                             case 0 -> {
-                                System.out.println("* Update operation cancelled. *");
+                                System.out.println(GREEN+"* Update operation cancelled. *"+RESET);
                                 updating = false;
                             }
-                            default -> System.out.println("Invalid option. Please try again.");
+                            default -> System.out.println(RED+"Invalid option. Please try again."+RESET);
                         }
 
                         displayStaffMember(List.of(staffMember));
@@ -161,7 +161,7 @@ public class StaffOperation {
                         }
                     }
 
-                    System.out.println("* Employee update process completed! *");
+                    System.out.println(GREEN+"* Employee update process completed! *"+RESET);
                 }, () -> System.out.println("* Employee with ID " + updateID + " not found! *"));
     }
 
@@ -188,78 +188,18 @@ public class StaffOperation {
 
             if (confirm.equals("yes") || confirm.equals("y")) {
                 staff.remove(staffMember);
-                System.out.println("* Employee deleted successfully! *");
+                System.out.println(GREEN+"* Employee deleted successfully! *"+RESET);
 
                 if (staff.isEmpty()) {
-                    System.out.println("* No employees remaining in the system. *");
+                    System.out.println(YELLOW+"* No employees remaining in the system. *"+RESET);
                 } else {
                     displayStaffMember(staff);
                 }
             } else {
-                System.out.println("* Deletion canceled. *");
+                System.out.println(YELLOW+"* Deletion canceled. *"+RESET);
             }
 
-        }, () -> System.out.println("* Employee with ID " + deleteID + " not found! *"));
-    }
-
-
-    public void insertEmployee(Scanner sc, List<StaffMember> staff) {
-        System.out.println("\n"+"=".repeat(20) + " Insert New Employee " + "=".repeat(20));
-
-        Menu.insertEmployee();
-        System.out.print("==> Enter type number: ");
-        int choice = sc.nextInt();
-        sc.nextLine();
-
-        System.out.print("Enter Employee ID: ");
-        int id = sc.nextInt();
-        sc.nextLine();
-
-        System.out.print("Enter Employee Name: ");
-        String name = sc.nextLine();
-
-        System.out.print("Enter Employee Address: ");
-        String address = sc.nextLine();
-
-        StaffMember newEmployee = null;
-
-        switch (choice) {
-            case 1 -> {
-                System.out.print("Enter Salary (if applicable, else enter 0): ");
-                double salary = sc.nextDouble();
-                sc.nextLine();
-                newEmployee = new Volunteer(id, name, address, salary);
-            }
-            case 2 -> {
-                System.out.print("Enter Salary: ");
-                double salary = sc.nextDouble();
-
-                System.out.print("Enter Bonus: ");
-                double bonus = sc.nextDouble();
-                sc.nextLine();
-
-                newEmployee = new SalaryEmployee(id, name, address, salary, bonus);
-            }
-            case 3 -> {
-                System.out.print("Enter Hours Worked: ");
-                int hours = sc.nextInt();
-
-                System.out.print("Enter Hourly Rate: ");
-                double rate = sc.nextDouble();
-                sc.nextLine();
-
-                newEmployee = new HourlySalaryEmployee(id, name, address, hours, rate);
-            }
-            default -> {
-                System.out.println("* Invalid selection. Employee not added. *");
-                return;
-            }
-        }
-
-        staff.add(newEmployee);
-        System.out.println("* Employee added successfully! *");
-
-        displayStaffMember(staff);
+        }, () -> System.out.println(RED+"* Employee with ID " + deleteID + " not found! *"+RESET));
     }
 
 
