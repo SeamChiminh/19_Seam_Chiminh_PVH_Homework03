@@ -111,7 +111,7 @@ public class Main implements Color{
                     case 3:
                         System.out.println("=".repeat(40) + " Display Staff " + "=".repeat(40));
                         StaffOperation staffOperation = new StaffOperation();
-                        staffOperation.displayStaffMember(staff);
+                        staffOperation.displayStaffMemberPagination(staff);
                         break;
 
                     case 4:
